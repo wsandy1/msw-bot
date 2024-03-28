@@ -26,7 +26,7 @@ module.exports = {
         });
 
         let until = Date.now() + interaction.options.getInteger('duration')*7*24*60*60*1000
-        db.createLeave(interaction.options.getString('reason'), until, interaction.user.id)
+        let leaveid = await db.createLeave(interaction.options.getString('reason'), until, interaction.user.id)
         interaction.reply({content: `Logged leave until ${time(new Date(until), 'd')}`, ephemeral: true})
 
         const embed = new EmbedBuilder()
@@ -40,7 +40,7 @@ module.exports = {
             )
 
         const button = new ButtonBuilder()
-            .setCustomId("reject")
+            .setCustomId("reject-"+leaveid[0].id)
             .setLabel("Reject")
             .setStyle(ButtonStyle.Danger)
 

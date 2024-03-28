@@ -23,6 +23,7 @@ module.exports = {
 
         members.forEach(m => {
             db.updateLastPlayed(m, Date.now())
+            db.clearWarn(m)
         })
 
         await interaction.reply({content: `Registered game with <@${members.join(">, <@")}>`, ephemeral: false})
