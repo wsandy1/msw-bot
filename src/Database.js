@@ -24,7 +24,6 @@ module.exports = class Database {
                 table.string('reason');
                 table.integer('expires');
                 table.string('discordId');
-                table.foreign('discordId').references('users.discordId');
             })  
         }
     }

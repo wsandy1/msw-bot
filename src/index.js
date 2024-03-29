@@ -114,15 +114,15 @@ const prune = CronJob.from({
 		})
 
 		members.forEach(async m => {
-			if (!await db.checkLeave(m.id)) {
+			if (!await db.checkLeave(m.discordId)) {
 				if (m.userType == 4) {
 					if ((Date.now() - m.joined) >= 5*7*24*60*60*1000 && (Date.now() - m.joined) < 6*24*60*60*1000) {
-						if (!await db.isFirstWarned(m.id)) {
+						if (!await db.isFirstWarned(m.discordId)) {
 							// discordclient.users.send(m.discordId, `
 							// **__Ministry of Silly Warfare Activity Notice__**
 							// \n
 							// \n
-							// Dear <@${m.id}>,
+							// Dear <@${m.discordId}>,
 							// \n
 							// \n
 							// We have noticed that you hold "Recruit" status in MsW. Please be aware that **you will be removed from the server on** ${time(m.lastPlayed + 7*24*60*60*1000, 'd')}** unless you obtain "Member" status by then. To do so you need to join us for a game and speak to a Moderator.
@@ -133,15 +133,15 @@ const prune = CronJob.from({
 							// *If you notice an issue with this message, please message <@744626724641177630>* 
 							// `)
 							// persistents.logchannel.send(`**Activity:** Recruit <@<@${m.discordId}>> has been on the server for 5 weeks, and has been automatically messaged with a 1 week warning.`)
-							db.firstWarn(m.id)
-							persistents.logchannel.send(`**Activity:** Recruit <@<@${m.discordId}>> has been on the server for 5 weeks, message them with 1 week warning`)
+							db.firstWarn(m.discordId)
+							persistents.logchannel.send(`**Activity:** Recruit <@${m.discordId}> has been on the server for 5 weeks, message them with 1 week warning`)
 						}
 					} else if ((Date.now() - m.joined) >= 6*7*24*60*60*1000) {
 						// discordclient.users.send(m.discordId, `
 						// **__Ministry of Silly Warfare Activity Notice__**
 						// \n
 						// \n
-						// Dear <@${m.id}>,
+						// Dear <@${m.discordId}>,
 						// \n
 						// \n
 						// As per the above message, you have been removed from MsW. Feel free to rejoin should you wish to play with us again! https://discord.gg/4ftzNafB8M
@@ -155,16 +155,16 @@ const prune = CronJob.from({
 						// await persistents.guild.members.fetch(m.discordId).then(memb => {
 						// 	memb.kick();
 						// })
-						persistents.logchannel.send(`**Activity:** Recruit <@<@${m.discordId}>> needs to be kicked for inactivity.`)
+						persistents.logchannel.send(`**Activity:** Recruit <@${m.discordId}> needs to be kicked for inactivity.`)
 					}
 				} else if (m.userType == 3) {
 					if ((Date.now() - m.lastPlayed) >= 8*7*24*60*60*1000 && (Date.now() - m.lastPlayed) < 11*24*60*60*1000) {
-						if (!await db.isFirstWarned(m.id)) {
+						if (!await db.isFirstWarned(m.discordId)) {
 							// discordclient.users.send(m.discordId, `
 							// **__Ministry of Silly Warfare Activity Notice__**
 							// \n
 							// \n
-							// Dear <@${m.id}>,
+							// Dear <@${m.discordId}>,
 							// \n
 							// \n
 							// We have noticed that you have been inactive for a while in MsW. We operate an activity policy in order to keep the server well-pruned, so please be aware that **you will be removed from the server on** ${time(m.lastPlayed + 4*7*24*60*60*1000, 'd')}** unless we see you in-game by then. Note that you can register leave by using the **/leave** command in the server, should you be away for an extended period of time.
@@ -176,16 +176,16 @@ const prune = CronJob.from({
 							// *If you notice an issue with this message, please message <@744626724641177630>*
 							// `)
 							// persistents.logchannel.send(`**Activity:** Member <@<@${m.discordId}>> has been inactive for 8 weeks, and has been automatically messaged with a 1 month warning.`)
-							db.firstWarn(m.id)
-							persistents.logchannel.send(`**Activity:** Member <@<@${m.discordId}>> has been inactive for 8 weeks, and has been automaticallythey need to be messaged with a 1 month warning.`)
+							db.firstWarn(m.discordId)
+							persistents.logchannel.send(`**Activity:** Member <@${m.discordId}> has been inactive for 8 weeks, and has been automaticallythey need to be messaged with a 1 month warning.`)
 						}	
 					} else if ((Date.now() - m.lastPlayed) >= 11*7*24*60*60*1000 && (Date.now() - m.lastPlayed) < 12*24*60*60*1000) {
-						if (!await db.isSecondWarned(m.id)) {
+						if (!await db.isSecondWarned(m.discordId)) {
 							// discordclient.users.send(m.discordId, `
 							// **__Ministry of Silly Warfare Activity Notice__**
 							// \n
 							// \n
-							// Dear <@${m.id}>,
+							// Dear <@${m.discordId}>,
 							// \n
 							// \n
 							// We have noticed that you have been inactive for a while in MsW. We operate an activity policy in order to keep the server well-pruned, so please be aware that **you will be removed from the server on** ${time(m.lastPlayed + 7*24*60*60*1000, 'd')}** unless we see you in-game by then. Note that you can register leave by using the **/leave** command in the server, should you be away for an extended period of time.
@@ -197,15 +197,15 @@ const prune = CronJob.from({
 							// *If you notice an issue with this message, please message <@744626724641177630>*
 							// `)
 							// persistents.logchannel.send(`**Activity:** Member <@<@${m.discordId}>> has been inactive for 11 weeks, and has been automatically messaged with a 1 week warning.`)
-							db.secondWarn(m.id)
-							persistents.logchannel.send(`**Activity:** Member <@<@${m.discordId}>> has been inactive for 11 weeks, needs to be messaged with a 1 week warning.`)
+							db.secondWarn(m.discordId)
+							persistents.logchannel.send(`**Activity:** Member <@${m.discordId}> has been inactive for 11 weeks, needs to be messaged with a 1 week warning.`)
 						}
 					} else if ((Date.now() - m.lastPlayed) >= 6*7*24*60*60*1000) {
 						// discordclient.users.send(m.discordId, `
 						// **__Ministry of Silly Warfare Activity Notice__**
 						// \n
 						// \n
-						// Dear <@${m.id}>,
+						// Dear <@${m.discordId}>,
 						// \n
 						// \n
 						// As per the above message, you have been removed from MsW. Feel free to rejoin should you wish to play with us again! https://discord.gg/4ftzNafB8M
@@ -219,7 +219,7 @@ const prune = CronJob.from({
 						// await persistents.guild.members.fetch(m.discordId).then(memb => {
 						// 	memb.kick();
 						// })
-						persistents.logchannel.send(`**Activity:** Member <@<@${m.discordId}>> needs to be kicked for inactivity.`)
+						persistents.logchannel.send(`**Activity:** Member <@${m.discordId}> needs to be kicked for inactivity.`)
 						
 					}
 				} else if (m.userType == 2) {
@@ -228,7 +228,7 @@ const prune = CronJob.from({
 					}
 				}
 			} else {
-				db.updateLastPlayed(m.id, m.lastPlayed + 24*60*60*1000)
+				db.updateLastPlayed(m.discordId, m.lastPlayed + 24*60*60*1000)
 			}
 		})
 	},
