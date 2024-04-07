@@ -12,7 +12,8 @@ module.exports = {
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageEvents),
 	async execute(interaction, db, discordclient) {
-        let channel = interaction.options.getChannel("channel", true)
+        let optchannel = interaction.options.getChannel("channel", true)
+        let channel = await interaction.guild.channels.fetch(optchannel.id, { force: true })
         let members = []
 
         channel.members.forEach(member => {

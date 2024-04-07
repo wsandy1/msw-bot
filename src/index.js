@@ -7,7 +7,7 @@ const { CronJob } = require('cron')
 
 const db = new Database(config.db)
 db.init()
-const discordclient = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
+const discordclient = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildVoiceStates] });
 const persistents = {} // for saving discord related objects which will be repeatedly accessed
 discordclient.commands = new Collection();
 
