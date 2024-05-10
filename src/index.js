@@ -116,7 +116,7 @@ const prune = CronJob.from({
 		members.forEach(async m => {
 			if (!await db.checkLeave(m.discordId)) {
 				if (m.userType == 4) {
-					if ((Date.now() - m.joined) >= 5*7*24*60*60*1000 && (Date.now() - m.joined) < 6*24*60*60*1000) {
+					if ((Date.now() - m.joined) >= 5*7*24*60*60*1000 && (Date.now() - m.joined) < 6*7*24*60*60*1000) {
 						if (!await db.isFirstWarned(m.discordId)) {
 							// discordclient.users.send(m.discordId, `
 							// **__Ministry of Silly Warfare Activity Notice__**
@@ -158,7 +158,7 @@ const prune = CronJob.from({
 						persistents.logchannel.send(`**Activity:** Recruit <@${m.discordId}> needs to be kicked for inactivity.`)
 					}
 				} else if (m.userType == 3) {
-					if ((Date.now() - m.lastPlayed) >= 8*7*24*60*60*1000 && (Date.now() - m.lastPlayed) < 11*24*60*60*1000) {
+					if ((Date.now() - m.lastPlayed) >= 8*7*24*60*60*1000 && (Date.now() - m.lastPlayed) < 11*7*24*60*60*1000) {
 						if (!await db.isFirstWarned(m.discordId)) {
 							// discordclient.users.send(m.discordId, `
 							// **__Ministry of Silly Warfare Activity Notice__**
@@ -179,7 +179,7 @@ const prune = CronJob.from({
 							db.firstWarn(m.discordId)
 							persistents.logchannel.send(`**Activity:** Member <@${m.discordId}> has been inactive for 8 weeks, and has been automaticallythey need to be messaged with a 1 month warning.`)
 						}	
-					} else if ((Date.now() - m.lastPlayed) >= 11*7*24*60*60*1000 && (Date.now() - m.lastPlayed) < 12*24*60*60*1000) {
+					} else if ((Date.now() - m.lastPlayed) >= 11*7*24*60*60*1000 && (Date.now() - m.lastPlayed) < 12*7*24*60*60*1000) {
 						if (!await db.isSecondWarned(m.discordId)) {
 							// discordclient.users.send(m.discordId, `
 							// **__Ministry of Silly Warfare Activity Notice__**
@@ -200,7 +200,7 @@ const prune = CronJob.from({
 							db.secondWarn(m.discordId)
 							persistents.logchannel.send(`**Activity:** Member <@${m.discordId}> has been inactive for 11 weeks, needs to be messaged with a 1 week warning.`)
 						}
-					} else if ((Date.now() - m.lastPlayed) >= 6*7*24*60*60*1000) {
+					} else if ((Date.now() - m.lastPlayed) >= 12*7*24*60*60*1000) {
 						// discordclient.users.send(m.discordId, `
 						// **__Ministry of Silly Warfare Activity Notice__**
 						// \n
